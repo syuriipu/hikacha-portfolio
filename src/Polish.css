@@ -1,0 +1,48 @@
+/* 2026-11 読みやすさ・スマホ表示の調整（既存デザインはそのままに、最後に読み込んで上書き） */
+
+/* 説明文のグレーを少し濃く（アイボリー背景でコントラスト比 約5.5:1） */
+:root{--muted:#5c6359}
+
+/* WORKS 詳細：横スクロールする画面一覧がグリッド幅を押し広げないようにする */
+.detail-article>*{min-width:0}
+
+/* ABOUT：ロゴのドット（ボタン）があってもヘッダーが1行に収まるように */
+.about-header{grid-template-columns:auto auto 1fr auto}
+.about-header .about-dot{justify-self:start}
+
+/* ABOUT：プロフィールにアトリエアイコン */
+.profile-mark .profile-avatar{width:min(68%,250px);aspect-ratio:1;border-radius:50%;object-fit:cover;background:#69748d;border:8px solid var(--paper);box-shadow:0 10px 24px -14px rgba(38,48,42,.55);transform:rotate(1.2deg)}
+
+/* HOME：制作日記の記事数に合わせてカードの列数を変える（空きブロックを作らない） */
+.journal-grid.is-count-1{grid-template-columns:1fr}
+.journal-grid.is-count-1 .journal-card{min-height:0;padding:clamp(28px,4vw,52px) clamp(24px,5vw,64px)}
+.journal-grid.is-count-1 .journal-card h3{max-width:20em}
+.journal-grid.is-count-1 .journal-card p{max-width:38rem}
+.journal-grid.is-count-2{grid-template-columns:1.15fr 1fr}
+
+@media(max-width:800px){
+  .detail-article{grid-template-columns:minmax(0,1fr)}
+
+  /* HOME 表紙：アイコンを1列目に置き、SCROLLとメタ情報はその下へ */
+  .cover{min-height:calc(100svh - 96px)}
+  .cover-visual{grid-column:1}
+  .scroll-note{grid-row:4}
+  .cover-meta-right{grid-row:5}
+
+  .journal-grid.is-count-2{grid-template-columns:1fr}
+
+  /* スマホのメニュー：ロゴの下に1段で並べ、文字とタップ範囲を大きく */
+  .site-header{height:auto;grid-template-columns:auto 1fr;padding-top:12px;padding-bottom:0;row-gap:0}
+  .site-header nav{grid-column:1/-1;justify-self:stretch;justify-content:space-between;gap:4px;margin:0 -4px}
+  .site-header nav a{padding:12px 4px;font-size:11px;letter-spacing:.06em}
+  .site-header nav a.is-current:after{left:4px;right:4px;bottom:7px}
+
+  /* ヘッダーが2段になった分、季節ラベルを下げる */
+  .lab-season-label{top:88px}
+  .lab-hero{padding-top:34px}
+  .about-season-label{top:116px}
+
+  /* ABOUT：アイコンを下寄せにして、左上の文字と重ならないように */
+  .profile-mark{min-height:330px;place-items:end center;padding-bottom:30px}
+  .profile-mark .profile-avatar{width:min(58%,220px)}
+}

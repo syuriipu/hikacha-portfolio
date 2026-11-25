@@ -1,13 +1,13 @@
 .season-shell{min-height:100vh;position:relative;isolation:isolate;--season-accent:var(--sage);--season-soft:var(--pale)}
 .season-shell:before{content:'';position:absolute;z-index:-2;inset:0;pointer-events:none;background:radial-gradient(circle at 82% 8%,color-mix(in srgb,var(--season-soft) 70%,transparent),transparent 24rem);opacity:.5}
 .season-shell :is(.eyebrow,.section-number,.season-edition span){color:var(--season-accent)}
-.season-edition{display:flex;align-items:baseline;flex-wrap:wrap;gap:.45rem;margin:0;color:var(--muted);font:10px/1.5 var(--mono);letter-spacing:.08em}
+.season-edition{display:flex;align-items:baseline;flex-wrap:wrap;gap:.45rem;margin:0;color:var(--muted);font:11px/1.5 var(--mono);letter-spacing:.08em}
 .season-edition b{color:var(--season-accent);font-weight:500}
 .season-edition em{font:400 12px/1.6 var(--sans);letter-spacing:0}
-.season-edition.is-compact{font-size:9px}
-.season-motion-toggle{position:fixed;right:13px;bottom:13px;z-index:20;border:1px solid var(--line);background:color-mix(in srgb,var(--paper) 90%,transparent);color:var(--muted);padding:5px 8px;font:9px var(--mono);letter-spacing:.04em;cursor:pointer}
-.season-preview{position:fixed;z-index:40;left:10px;bottom:10px;padding:7px 9px;border:1px solid var(--line);background:var(--paper);box-shadow:3px 4px 0 color-mix(in srgb,var(--season-soft) 85%,var(--paper));font:9px var(--mono);letter-spacing:.04em}
+.season-edition.is-compact{font-size:10px}
+.season-motion-toggle{position:fixed;right:13px;bottom:13px;z-index:20;border:1px solid var(--line);background:color-mix(in srgb,var(--paper) 90%,transparent);color:var(--muted);padding:5px 8px;font:10px var(--mono);letter-spacing:.04em;cursor:pointer}
+.season-preview{position:fixed;z-index:40;left:10px;bottom:10px;padding:7px 9px;border:1px solid var(--line);background:var(--paper);box-shadow:3px 4px 0 color-mix(in srgb,var(--season-soft) 85%,var(--paper));font:10px var(--mono);letter-spacing:.04em}
 .season-preview select{margin-left:7px;border:0;border-left:1px solid var(--line);background:transparent;padding-left:7px;color:var(--ink);font:inherit}
 .season-paused .season-piece,.season-paused .event-piece{animation-play-state:paused}
-@media(max-width:700px){.season-motion-toggle{bottom:8px;right:8px;font-size:8px}.season-preview{max-width:calc(100vw - 150px)}.season-preview select{max-width:128px}.season-edition em{width:100%;font-size:11px}}
+@media(max-width:700px){.season-motion-toggle{bottom:8px;right:8px;font-size:9.5px}.season-preview{max-width:calc(100vw - 150px)}.season-preview select{max-width:128px}.season-edition em{width:100%;font-size:11px}}
 @media(prefers-reduced-motion:reduce){.season-motion-toggle{display:none}}
