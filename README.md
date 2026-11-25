@@ -34,6 +34,7 @@ npm run lint
 | 季節・イベントの文言や色 | `src/seasonal.js` の `seasons`、`events` |
 | JOURNAL 記事 | `content/journal/*.md` |
 | 画像・動画 | `public/media/` 以下 |
+| 問い合わせ先メールアドレス・件名・本文テンプレート | `src/contactConfig.js` |
 
 `public/media/example.webp` を追加した時は、データ側に `media/example.webp` と書きます。画像・動画の品質は不必要に落とさず、作品ごとに適切なファイルを使ってください。
 
@@ -68,6 +69,17 @@ npm run lint
 - 成長記録は `milestones` に `{ date, title, description, stage, image, relatedArticle }` の形で追加します。日付が未確認なら空のままにします。
 - 完成作品は `relatedWorks` に WORKS の `slug` を入れて関連付けます。
 
+## 問い合わせ窓口（CONTACT）を編集する
+
+CONTACTページ（`#/contact`）は `src/Contact.jsx`、見た目は `src/Contact.css` です。問い合わせ先の設定は `src/contactConfig.js` にまとめています。
+
+- **メールアドレスを変更する**: `src/contactConfig.js` の `CONTACT_EMAIL` を書き換えます。CONTACTページ、WORKSのアプリ詳細、ABOUT、コピーボタンのすべてに反映されます。
+- **件名を変更する**: アプリ用は `appSupportSubject`（`【アプリ名】お問い合わせ`）、制作活動・その他は `inquiries` の `subject` を編集します。
+- **本文テンプレートを変更する**: `APP_SUPPORT_BODY` の配列を編集します。件名・本文は `encodeURIComponent` で自動的にURLエンコードされます。
+- **問い合わせボタンが出るアプリ**: `src/data.js` の `works` で `status: '公開済み'` かつ `APP` / `GAME` の作品に自動で表示されます。公開を終えたアプリは `status` を変えるとボタンが消えます。
+
+フォームや外部API・バックエンドは使わず、`mailto:` リンクとクリップボードへのコピーだけで動きます。メールアプリが設定されていない環境でも、アドレスをコピーして問い合わせられます。導線はヘッダーの CONTACT、全通常ページのフッター、HOME下部、WORKSの公開済みアプリ詳細、ABOUT にあります（SECRETには置いていません）。
+
 ## 表紙・季節・イベントを編集する
 
 - 表紙画像、キャプション、号数、発行年: `src/seasonal.js` の `magazine`
@@ -87,7 +99,7 @@ npm run lint
 
 Vite は `base: '/hikacha-portfolio/'` とハッシュルーティングを使っているため、`https://syuriipu.github.io/hikacha-portfolio/` で、作品・記事・LABの詳細ページを再読み込みできます。
 
-OGP画像・canonical・robots.txt・sitemap.xml は上記の公開URLに設定済みです。公開先を変更する場合は `index.html`、`public/robots.txt`、`public/sitemap.xml`、`public/site.webmanifest` を同時に更新してください。SECRET は通常のナビゲーション・サイトマップには追加せず、ブラウザで開いた時に `noindex,nofollow` を指定します。
+OGP画像・canonical・robots.txt・sitemap.xml は上記の公開URLに設定済みです。公開先を変更する場合は `index.html`、`public/robots.txt`、`public/sitemap.xml`、`public/site.webmanifest` を同時に更新してください。サイトマップには HOME と CONTACT（`#/contact`）を載せています。SECRET は通常のナビゲーション・サイトマップには追加せず、ブラウザで開いた時に `noindex,nofollow` を指定します。
 
 ## 困ったときの確認順
 
@@ -102,6 +114,7 @@ OGP画像・canonical・robots.txt・sitemap.xml は上記の公開URLに設定�
 
 - [ ] 下書き・非公開メモ・個人情報をコミットしていない
 - [ ] App Store / Google Play / GitHub などの外部リンクを実際に開いた
+- [ ] CONTACTのメールリンクでメールアプリが開き、件名・本文が正しく入る／コピーボタンで「コピーしました」と表示される
 - [ ] PC・タブレット・スマートフォンで主要ページを確認した
 - [ ] `npm run build && npm run lint` が成功した
 - [ ] GitHub Pages の公開URLで OGP画像・canonical を再確認した

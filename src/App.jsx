@@ -4,6 +4,7 @@ import Works from './Works'
 import Journal from './Journal'
 import Lab from './Lab'
 import About from './About'
+import Contact from './Contact'
 import Secret, { SecretEaster } from './Secret'
 import { journalEntries } from './generated/journal'
 import SeasonShell, { SeasonEdition } from './SeasonShell'
@@ -11,7 +12,7 @@ import { magazine } from './SeasonConfig'
 import './App.css'
 import './CoverIcon.css'
 
-const menu = [['WORKS', '#/works'], ['JOURNAL', '#/journal'], ['LAB', '#/lab'], ['ABOUT', '#/about']]
+const menu = [['WORKS', '#/works'], ['JOURNAL', '#/journal'], ['LAB', '#/lab'], ['ABOUT', '#/about'], ['CONTACT', '#/contact']]
 const currentYear = new Date().getFullYear()
 
 function sectionTitle(route) {
@@ -19,6 +20,7 @@ function sectionTitle(route) {
   if (route.startsWith('#/journal')) return 'Journal — hikacha. The Creative Atelier'
   if (route.startsWith('#/lab')) return 'Lab — hikacha. The Creative Atelier'
   if (route.startsWith('#/about')) return 'About — hikacha. The Creative Atelier'
+  if (route.startsWith('#/contact')) return 'Contact — hikacha. The Creative Atelier'
   if (route.startsWith('#/secret')) return 'ひかちゃについて_最終版_修正済_本当の最終版.pptx'
   return 'hikacha. — The Creative Atelier'
 }
@@ -70,7 +72,7 @@ export default function App() {
     const [, section, slug] = route.split('/')
     const detail = section === 'works' ? works.find((item) => item.slug === slug) : section === 'journal' ? journalEntries.find((item) => item.slug === slug && !item.draft) : section === 'lab' ? projects.find((item) => item.slug === slug && item.visibility === 'public') : null
     const title = detail ? `${detail.title} — hikacha. The Creative Atelier` : sectionTitle(route)
-    const description = detail?.description || 'ゲームとアプリと、絵をつくる。ひかちゃの制作室。作品や制作日記、開発中のアイデアを紹介する個人ポートフォリオサイトです。'
+    const description = detail?.description || (route.startsWith('#/contact') ? 'ひかちゃの制作室への問い合わせ窓口。アプリサポート（ゆるすたでぃ・かわいいメモ帳など）や制作活動についてのお問い合わせはメールで受け付けています。' : null) || 'ゲームとアプリと、絵をつくる。ひかちゃの制作室。作品や制作日記、開発中のアイデアを紹介する個人ポートフォリオサイトです。'
     document.title = title
     document.querySelector('meta[name="description"]')?.setAttribute('content', description)
     document.querySelector('meta[property="og:title"]')?.setAttribute('content', title)
@@ -86,6 +88,7 @@ export default function App() {
   if (route.startsWith('#/secret/why')) return <SecretEaster />
   if (route.startsWith('#/secret')) return <Secret />
   if (route.startsWith('#/about')) return <SeasonShell><About /></SeasonShell>
+  if (route.startsWith('#/contact')) return <SeasonShell><Contact /></SeasonShell>
   return <SeasonShell>
     <a className="skip-link" href="#main">本文へ移動</a>
     <header className="site-header"><a href="#top" className="wordmark" aria-label="hikacha. ホーム">hikacha<span>.</span></a><p className="header-edition">THE CREATIVE ATELIER<br />{magazine.volume} / {magazine.year}</p><nav aria-label="メインナビゲーション">{menu.map(([label, href]) => <a href={href} key={label}>{label}</a>)}</nav></header>
@@ -99,7 +102,8 @@ export default function App() {
       <section id="lab" className="content-section lab-section"><RuleTitle number="03" eyebrow="IN THE LAB" title="アイデアの種" note="まだ完成していないものほど、面白い。" /><div className="lab-status-key"><span><i className="status-dot planning" />発芽</span><span><i className="status-dot development" />成長</span><a href="#/lab">アイデアの庭を見る ↗</a></div><Reveal><article className="lab-feature"><div className="lab-text"><p className="status"><i className="status-dot development" />GROWING / 成長</p><h3>{homeColony.title}</h3><p className="lab-lead">{homeColony.description}</p><p>{homeColony.concept}</p><ul>{homeColony.features.map((feature) => <li key={feature.title}><strong>{feature.title}</strong><span>{feature.text}</span></li>)}</ul><div className="tag-list">{homeColony.technologies.map((tag) => <span key={tag}>{tag}</span>)}</div><a className="journal-link" href={`#/lab/${homeColony.slug}`}>育成ノートをひらく ↗</a></div><div className="lab-images">{homeColony.images.map((image, index) => <figure className={`lab-image lab-image-${index + 1}`} key={image.src}><img src={image.src} alt={image.alt} loading="lazy" /><figcaption>DEVELOPMENT SNAPSHOT</figcaption></figure>)}</div></article></Reveal><Reveal><article className="project-seed"><div><p className="status"><i className="status-dot planning" />SPROUT / 発芽</p><h3>{homeHoliday.title}</h3><p>{homeHoliday.description} 詳細は、制作の進行に合わせてこの場所に追加していきます。</p><a className="journal-link" href={`#/lab/${homeHoliday.slug}`}>育成ノートをひらく ↗</a></div><p className="seed-note">NEXT SEED<br />IN THE ATELIER</p></article></Reveal></section>
 
       <section id="about" className="content-section about-section"><RuleTitle number="04" eyebrow="ABOUT THE MAKER" title="制作室について" note="企画・開発・絵を、行ったり来たり。" /><div className="about-layout"><div className="about-copy"><p className="about-name">{profile.name}<span> / creator</span></p><p>{profile.about}</p><div className="skill-lines">{profile.skills.map((skill) => <span key={skill.label}>{skill.label}<small>{skill.note}</small></span>)}</div></div><aside className="counter" aria-label="制作アーカイブの内訳"><p>ATELIER ARCHIVE</p><strong>{archiveCount}</strong><span>pieces in the studio</span><dl><div><dt>{apps.length}</dt><dd>APPS &amp; GAMES</dd></div><div><dt>{live2d.length}</dt><dd>LIVE2D WORKS</dd></div><div><dt>{illustrations.length}</dt><dd>ILLUSTRATIONS</dd></div></dl></aside></div><div className="shelf" aria-label="アトリエの棚">{live2d.map((model) => <figure key={model.video}><video muted loop playsInline preload="metadata" poster={`${model.video}.jpg`}><source src={`${model.video}.mp4`} type="video/mp4" /></video><figcaption>{model.title}</figcaption></figure>)}</div></section>
+      <aside className="home-contact" aria-label="お問い合わせのご案内"><p><span>LETTERS TO THE ATELIER</span>アプリのサポートや制作活動についてのお便りは、お問い合わせ窓口へ。</p><a href="#/contact">お問い合わせ・アプリサポート →</a></aside>
     </main>
-    <footer className="site-footer"><p className="footer-logo">hikacha<span>.</span></p><p>Curiosity makes the next page.</p><div>{contacts.map((contact) => <a href={contact.url} target="_blank" rel="noreferrer" key={contact.label}>{contact.label} ↗</a>)}</div><small>© {currentYear} hikacha. / The Creative Atelier</small></footer>
+    <footer className="site-footer"><p className="footer-logo">hikacha<span>.</span></p><p>Curiosity makes the next page.</p><div><a href="#/contact">お問い合わせ・アプリサポート</a>{contacts.map((contact) => <a href={contact.url} target="_blank" rel="noreferrer" key={contact.label}>{contact.label} ↗</a>)}</div><small>© {currentYear} hikacha. / The Creative Atelier</small></footer>
   </SeasonShell>
 }
