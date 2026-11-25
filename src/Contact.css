@@ -63,7 +63,7 @@
 .letter-card:after{content:'';position:absolute;top:0;bottom:0;left:clamp(14px,2vw,22px);border-left:1px solid color-mix(in srgb,var(--season-accent,#d8a0a0) 40%,transparent)}
 .letter-card h2{margin:6px 0 12px;font:600 clamp(1.5rem,2.6vw,2.1rem)/1.2 'Noto Serif JP',serif;letter-spacing:.02em}
 .letter-card>p:not(.eyebrow):not(.letter-number){max-width:38rem;margin:0 0 22px;color:var(--muted)}
-.letter-card .letter-button{margin-top:auto}
+.letter-card>.mail-link.is-card-action{margin-top:auto}
 .letter-number{position:absolute;top:clamp(18px,3vw,30px);right:clamp(18px,3vw,30px);margin:0;color:var(--line);font:10px var(--mono);letter-spacing:.1em}
 .letter-support{grid-column:1/-1}
 .app-letters{list-style:none;margin:0 0 20px;padding:0;width:100%;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
@@ -96,6 +96,22 @@
 .detail-contact p{width:100%;margin:0 0 4px;color:var(--muted);font-size:.9rem}
 .detail-contact .text-link{color:var(--sage);font:11px var(--mono);letter-spacing:.04em;text-underline-offset:5px}
 
+/* メールアプリが開かないときの代替手段 */
+.mail-link{display:inline-flex;flex-direction:column;align-items:flex-start;gap:10px;max-width:100%}
+.mail-link.is-block{display:flex;height:100%}
+.mail-link.is-block>.app-letter{width:100%}
+.mail-link .mail-fallback{display:grid;gap:8px;width:min(100%,420px);padding:14px 16px;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-left:3px solid var(--season-accent,var(--sage));box-shadow:0 14px 30px -24px rgba(38,48,42,.5);text-align:left;animation:fallback-in .25s ease}
+@keyframes fallback-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.mail-fallback-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.mail-fallback-head b{font:600 .9rem/1.4 'Noto Serif JP',serif}
+.mail-link .mail-fallback-close{border:0;background:none;color:var(--muted);font-size:1.1rem;line-height:1;padding:4px 6px;cursor:pointer}
+.mail-fallback-text{color:var(--muted);font-size:.8rem;line-height:1.6}
+.mail-fallback-actions{display:flex;flex-wrap:wrap;gap:6px}
+.mail-link .mail-fallback-actions a,.mail-link .mail-fallback-actions button{display:inline-flex;align-items:center;min-height:36px;margin:0;padding:6px 11px;border:1px solid var(--deep);background:transparent;color:var(--deep);font:500 11px/1.3 var(--sans);letter-spacing:.03em;text-decoration:none;cursor:pointer}
+.mail-link .mail-fallback-actions a{background:var(--deep);color:var(--ivory)}
+.mail-link .mail-fallback-actions button:hover{background:var(--pale)}
+.mail-fallback-status{min-height:1.2em;color:var(--sage);font:500 11px var(--sans)}
+
 @media(max-width:800px){
   .contact-hero{grid-template-columns:1fr}
   .letter-illustration{justify-self:center;max-width:260px}
@@ -106,7 +122,7 @@
 }
 @media(max-width:480px){
   .small-stamp{display:none}
-  .address-actions .letter-button,.letter-card .letter-button{width:100%}
+  .address-actions .letter-button,.letter-card .letter-button,.address-actions .mail-link,.letter-card>.mail-link{width:100%}
   .copy-email{width:100%}
   .address-mail{font-size:1.25rem}
   .app-letters{grid-template-columns:1fr}

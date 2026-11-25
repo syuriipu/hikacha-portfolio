@@ -22,6 +22,14 @@ export function buildMailto({ subject, body } = {}) {
   return `mailto:${CONTACT_EMAIL}${params.length ? `?${params.join('&')}` : ''}`
 }
 
+// メールアプリが開かないとき用の Gmail 作成画面リンク（ブラウザで開くだけ。外部APIは使いません）
+export function buildGmailUrl({ subject, body } = {}) {
+  const params = [`view=cm`, `fs=1`, `to=${encodeURIComponent(CONTACT_EMAIL)}`]
+  if (subject) params.push(`su=${encodeURIComponent(subject)}`)
+  if (body) params.push(`body=${encodeURIComponent(body)}`)
+  return `https://mail.google.com/mail/?${params.join('&')}`
+}
+
 export const appSupportSubject = (title) => `【${title}】お問い合わせ`
 export const appSupportMailto = (title) => buildMailto({ subject: appSupportSubject(title), body: APP_SUPPORT_BODY })
 

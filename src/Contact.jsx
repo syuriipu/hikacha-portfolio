@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { contacts } from './data'
 import { events, seasons } from './SeasonConfig'
 import { SeasonEdition, useSeason } from './SeasonShell'
-import { CONTACT_EMAIL, appSupportMailto, buildMailto, copyText, creativeMailto, otherMailto, supportedApps } from './contactConfig'
+import { APP_SUPPORT_BODY, CONTACT_EMAIL, appSupportSubject, buildGmailUrl, buildMailto, copyText, inquiries, supportedApps } from './contactConfig'
 import './Contact.css'
 
 const currentYear = new Date().getFullYear()
@@ -66,6 +66,44 @@ export function CopyEmailButton({ className = '' }) {
   </span>
 }
 
+// mailtoリンク。押して約1.2秒たってもメールアプリへ切り替わらなかったら、
+// Gmailで書く・アドレス/件名/本文のコピーといった代わりの方法を表示します。
+export function MailLink({ subject, body, className = '', wrapperClassName = '', children }) {
+  const [fallback, setFallback] = useState(false)
+  const [message, setMessage] = useState('')
+  const timers = useRef([])
+  const cleanup = useRef(() => {})
+  useEffect(() => () => { timers.current.forEach((id) => window.clearTimeout(id)); cleanup.current() }, [])
+  const onClick = () => {
+    cleanup.current()
+    let left = false
+    const mark = () => { left = true }
+    window.addEventListener('blur', mark)
+    document.addEventListener('visibilitychange', mark)
+    cleanup.current = () => { window.removeEventListener('blur', mark); document.removeEventListener('visibilitychange', mark) }
+    timers.current.push(window.setTimeout(() => { cleanup.current(); if (!left) setFallback(true) }, 1200))
+  }
+  const copy = async (text, label) => {
+    const ok = await copyText(text)
+    setMessage(ok ? `${label}をコピーしました` : 'コピーできませんでした。手動で選択してコピーしてください。')
+    timers.current.push(window.setTimeout(() => setMessage(''), 2600))
+  }
+  return <span className={`mail-link ${wrapperClassName}`}>
+    <a className={className} href={buildMailto({ subject, body })} onClick={onClick}>{children}</a>
+    {fallback && <span className="mail-fallback" role="group" aria-label="メールアプリが開かない場合">
+      <span className="mail-fallback-head"><b>メールアプリが開きませんでしたか？</b><button type="button" className="mail-fallback-close" onClick={() => setFallback(false)} aria-label="閉じる">×</button></span>
+      <span className="mail-fallback-text">お使いのメールから、下の内容で送っていただけます。</span>
+      <span className="mail-fallback-actions">
+        <a href={buildGmailUrl({ subject, body })} target="_blank" rel="noreferrer">Gmailで書く ↗</a>
+        <button type="button" onClick={() => copy(CONTACT_EMAIL, 'アドレス')}>アドレスをコピー</button>
+        {subject && <button type="button" onClick={() => copy(subject, '件名')}>件名をコピー</button>}
+        {body && <button type="button" onClick={() => copy(body.replace(/\r\n/g, '\n'), '本文')}>本文をコピー</button>}
+      </span>
+      <span className="mail-fallback-status" role="status" aria-live="polite">{message}</span>
+    </span>}
+  </span>
+}
+
 export default function Contact() {
   useEffect(() => { window.scrollTo(0, 0) }, [])
   return <><a className="skip-link" href="#contact-main">本文へ移動</a><Header /><main id="contact-main" className="contact-page">
@@ -88,7 +126,7 @@ export default function Contact() {
         <a className="address-mail" href={buildMailto()}>{CONTACT_EMAIL}</a>
         <p className="address-note">お問い合わせは、すべてこのメールアドレスで受け付けています。</p>
         <div className="address-actions">
-          <a className="letter-button" href={buildMailto()}><span aria-hidden="true">✉</span>メールを書く</a>
+          <MailLink className="letter-button"><span aria-hidden="true">✉</span>メールを書く</MailLink>
           <CopyEmailButton />
         </div>
         <p className="address-fallback">メールアプリが開かない場合は、アドレスをコピーして、お使いのメールサービスから送ってください。</p>
@@ -103,10 +141,10 @@ export default function Contact() {
         <h2>アプリサポート</h2>
         <p>アプリの不具合報告、使い方のご質問、ご要望などを受け付けています。ボタンを押すと、件名と記入用のテンプレートが入った状態でメールアプリが開きます。</p>
         <ul className="app-letters">{supportedApps.map((app) => <li key={app.slug}>
-          <a className="app-letter" href={appSupportMailto(app.title)}>
+          <MailLink className="app-letter" wrapperClassName="is-block" subject={appSupportSubject(app.title)} body={APP_SUPPORT_BODY}>
             <span className="app-letter-icon">{(app.icon || app.image) && <img src={app.icon || app.image} alt="" loading="lazy" />}</span>
             <span className="app-letter-text"><small>{app.category}</small><b>{app.title}</b><i>このアプリについて問い合わせる ✉</i></span>
-          </a>
+          </MailLink>
         </li>)}</ul>
         <p className="template-preview"><small>自動で入る本文</small>・お問い合わせ内容：<br />・使用端末（任意）：<br />・OSバージョン（任意）：<br />・アプリのバージョン（任意）：</p>
       </article>
@@ -115,14 +153,14 @@ export default function Contact() {
         <p className="eyebrow">Creative Inquiry.</p>
         <h2>制作活動について</h2>
         <p>作品や制作活動に関するお問い合わせはこちらから。</p>
-        <a className="letter-button" href={creativeMailto}><span aria-hidden="true">✉</span>制作活動について問い合わせる</a>
+        <MailLink className="letter-button" wrapperClassName="is-card-action" subject={inquiries.creative.subject}><span aria-hidden="true">✉</span>制作活動について問い合わせる</MailLink>
       </article>
       <article className="letter-card" id="other">
         <p className="letter-number">No. 03</p>
         <p className="eyebrow">Other Messages.</p>
         <h2>その他</h2>
         <p>その他のご質問・ご感想など。短いひとことでも、うれしく読ませていただきます。</p>
-        <a className="letter-button" href={otherMailto}><span aria-hidden="true">✉</span>その他のお便りを送る</a>
+        <MailLink className="letter-button" wrapperClassName="is-card-action" subject={inquiries.other.subject}><span aria-hidden="true">✉</span>その他のお便りを送る</MailLink>
       </article>
     </section>
 
