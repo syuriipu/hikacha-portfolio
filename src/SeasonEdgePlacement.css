@@ -1,0 +1,4 @@
+/* Keep the editorial ornaments in the outer margin, away from titles and art. */
+.event-ornaments{right:clamp(24px,2vw,52px)!important;top:clamp(190px,12vw,220px)!important;transform:scale(.56);transform-origin:top right}
+.season-piece{opacity:.5}
+@media(max-width:700px){.event-ornaments{right:12px!important;top:128px!important;transform:scale(.45)}.season-piece{opacity:.38}}

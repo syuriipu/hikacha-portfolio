@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>ページが見つかりません | hikacha.</title>
+    <style>
+      body{margin:0;display:grid;min-height:100svh;place-items:center;background:#f8f5eb;color:#26352c;font-family:system-ui,sans-serif}
+      main{max-width:34rem;margin:1.5rem;padding:2.5rem;border:1px solid #99a894;text-align:center}a{color:#304436}
+    </style>
+  </head>
+  <body>
+    <main>
+      <p>THE CREATIVE ATELIER</p>
+      <h1>ページが見つかりません。</h1>
+      <p>URLをご確認のうえ、制作室の入口からもう一度お越しください。</p>
+      <p><a id="home" href="./">HOMEへ戻る</a></p>
+    </main>
+    <script>
+      const parts = location.pathname.split('/').filter(Boolean)
+      const base = location.hostname.endsWith('.github.io') && parts.length > 1 ? `/${parts[0]}/` : '/'
+      document.querySelector('#home').href = `${base}#/`
+    </script>
+  </body>
+</html>

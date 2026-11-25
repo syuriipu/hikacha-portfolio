@@ -1,0 +1,5 @@
+/* Decorative layers belong to the page, never the browser viewport. */
+.season-shell{overflow-x:clip}
+.season-shell:before{position:absolute}
+.season-ornaments{position:absolute}
+.event-ornaments{position:absolute}
