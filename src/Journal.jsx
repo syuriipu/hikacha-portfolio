@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { journalEntries, journalIncludesDrafts } from './generated/journal'
 import { works } from './data'
 import { SeasonEdition } from './SeasonShell'
+import PhotoPlate from './PhotoPlate'
+import { photos } from './photos'
 import './Journal.css'
 
 const categories = ['ALL', '企画', '開発', 'アップデート', '技術・学び', '制作日記']
@@ -32,7 +34,7 @@ function Index() {
   const published = journalEntries.filter((article) => !article.draft)
   const visible = journalEntries.filter((article) => category === 'ALL' || article.category === category)
   const feature = published.find((article) => article.featured) || published[0]
-  return <><Header /><main className="journal-page"><section className="journal-hero"><p className="eyebrow">THE CREATIVE ATELIER / JOURNAL</p><h1>Journal<span>.</span></h1><p className="journal-jp">つくる途中の、あれこれ。</p><p>ひらめき、試行錯誤、小さな発見。制作室からお届けする記録。</p><SeasonEdition compact />{journalIncludesDrafts && <p className="draft-notice">LOCAL PREVIEW — 下書きを表示しています</p>}</section><Feature article={feature} /><section className="latest-notes"><header><p className="eyebrow">LATEST NOTES</p><h2>Latest Notes<span>.</span></h2><div className="journal-filters">{categories.map((name) => <button type="button" className={category === name ? 'active' : ''} onClick={() => setCategory(name)} key={name}>{name}<small>{name === 'ALL' ? journalEntries.length : journalEntries.filter((article) => article.category === name).length}</small></button>)}</div></header>{visible.length ? <div className="journal-grid">{visible.map((article) => <ArticleCard article={article} key={article.slug} />)}</div> : <div className="journal-empty"><p>公開中の記事は、ただいま準備中です。</p><span>制作の途中にある記録を、少しずつ綴っていきます。</span></div>}</section><aside className="editors-note"><p className="eyebrow">EDITOR'S NOTE.</p><p>制作室の窓辺で、次のページを考えています。</p><small>— hikacha.</small></aside></main><Footer /></> }
+  return <><Header /><main className="journal-page"><section className="journal-hero"><p className="eyebrow">THE CREATIVE ATELIER / JOURNAL</p><h1>Journal<span>.</span></h1><p className="journal-jp">つくる途中の、あれこれ。</p><p>ひらめき、試行錯誤、小さな発見。制作室からお届けする記録。</p><SeasonEdition compact />{journalIncludesDrafts && <p className="draft-notice">LOCAL PREVIEW — 下書きを表示しています</p>}</section><PhotoPlate photo={photos.journal} className="journal-photo" /><Feature article={feature} /><section className="latest-notes"><header><p className="eyebrow">LATEST NOTES</p><h2>Latest Notes<span>.</span></h2><div className="journal-filters">{categories.map((name) => <button type="button" className={category === name ? 'active' : ''} onClick={() => setCategory(name)} key={name}>{name}<small>{name === 'ALL' ? journalEntries.length : journalEntries.filter((article) => article.category === name).length}</small></button>)}</div></header>{visible.length ? <div className="journal-grid">{visible.map((article) => <ArticleCard article={article} key={article.slug} />)}</div> : <div className="journal-empty"><p>公開中の記事は、ただいま準備中です。</p><span>制作の途中にある記録を、少しずつ綴っていきます。</span></div>}</section><div className="editors-spread"><PhotoPlate photo={photos.window} variant="portrait" /><aside className="editors-note"><p className="eyebrow">EDITOR'S NOTE.</p><p>制作室の窓辺で、次のページを考えています。</p><small>— hikacha.</small></aside></div></main><Footer /></> }
 
 // 本文中の **太字**、*斜体*、[文字](URL)、URL をReact要素として表示します（HTMLは解釈しないので安全です）。
 const inlinePattern = /(\*\*[^*\n]+\*\*|\*[^*\s][^*\n]*\*|\[[^\]\n]+\]\(https?:\/\/[^)\s]+\)|https?:\/\/[^\s<>（）「」、。]+)/g

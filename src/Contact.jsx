@@ -3,6 +3,8 @@ import { contacts } from './data'
 import { events, seasons } from './SeasonConfig'
 import { SeasonEdition, useSeason } from './SeasonShell'
 import { APP_SUPPORT_BODY, CONTACT_EMAIL, appSupportSubject, buildGmailUrl, buildMailto, copyText, inquiries, supportedApps } from './contactConfig'
+import PhotoPlate from './PhotoPlate'
+import { photos } from './photos'
 import './Contact.css'
 
 const currentYear = new Date().getFullYear()
@@ -117,6 +119,8 @@ export default function Contact() {
       </div>
       <LetterIllustration />
     </section>
+
+    <PhotoPlate photo={photos.contact} className="contact-photo" />
 
     <section className="contact-address" aria-labelledby="address-title">
       <div className="address-stripe" aria-hidden="true" />
