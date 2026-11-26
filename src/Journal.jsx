@@ -34,18 +34,40 @@ function Index() {
   const feature = published.find((article) => article.featured) || published[0]
   return <><Header /><main className="journal-page"><section className="journal-hero"><p className="eyebrow">THE CREATIVE ATELIER / JOURNAL</p><h1>Journal<span>.</span></h1><p className="journal-jp">つくる途中の、あれこれ。</p><p>ひらめき、試行錯誤、小さな発見。制作室からお届けする記録。</p><SeasonEdition compact />{journalIncludesDrafts && <p className="draft-notice">LOCAL PREVIEW — 下書きを表示しています</p>}</section><Feature article={feature} /><section className="latest-notes"><header><p className="eyebrow">LATEST NOTES</p><h2>Latest Notes<span>.</span></h2><div className="journal-filters">{categories.map((name) => <button type="button" className={category === name ? 'active' : ''} onClick={() => setCategory(name)} key={name}>{name}<small>{name === 'ALL' ? journalEntries.length : journalEntries.filter((article) => article.category === name).length}</small></button>)}</div></header>{visible.length ? <div className="journal-grid">{visible.map((article) => <ArticleCard article={article} key={article.slug} />)}</div> : <div className="journal-empty"><p>公開中の記事は、ただいま準備中です。</p><span>制作の途中にある記録を、少しずつ綴っていきます。</span></div>}</section><aside className="editors-note"><p className="eyebrow">EDITOR'S NOTE.</p><p>制作室の窓辺で、次のページを考えています。</p><small>— hikacha.</small></aside></main><Footer /></> }
 
+// 本文中の **太字**、*斜体*、[文字](URL)、URL をReact要素として表示します（HTMLは解釈しないので安全です）。
+const inlinePattern = /(\*\*[^*\n]+\*\*|\*[^*\s][^*\n]*\*|\[[^\]\n]+\]\(https?:\/\/[^)\s]+\)|https?:\/\/[^\s<>（）「」、。]+)/g
+function Inline({ text }) {
+  return text.split(inlinePattern).map((part, index) => {
+    if (!part) return null
+    if (/^\*\*[^*]+\*\*$/.test(part)) return <strong key={index}>{part.slice(2, -2)}</strong>
+    if (/^\*[^*\s][^*]*\*$/.test(part)) return <em key={index}>{part.slice(1, -1)}</em>
+    const link = part.match(/^\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)$/)
+    if (link) return <a key={index} href={link[2]} target="_blank" rel="noreferrer">{link[1]}</a>
+    if (/^https?:\/\//.test(part)) return <a key={index} href={part} target="_blank" rel="noreferrer">{part}</a>
+    return part
+  })
+}
+const tableCells = (line) => line.trim().replace(/^\||\|$/g, '').split('|').map((cell) => cell.trim())
+function Table({ block }) {
+  const [head, , ...rows] = block.split('\n').filter((line) => line.trim())
+  return <div className="article-table"><table><thead><tr>{tableCells(head).map((cell, index) => <th key={index}><Inline text={cell} /></th>)}</tr></thead><tbody>{rows.map((row, rowIndex) => <tr key={rowIndex}>{tableCells(row).map((cell, index) => <td key={index}><Inline text={cell} /></td>)}</tr>)}</tbody></table></div>
+}
+// 目次はハッシュルーティングと衝突しないよう、URLを変えずにスクロールします。
+const scrollToSection = (event, id) => { event.preventDefault(); document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }) }
+
 function Blocks({ body }) {
   const blocks = body.split('\n\n').filter(Boolean)
   const headings = blocks.filter((block) => /^##\s+/.test(block)).map((block) => block.replace(/^##\s+/, ''))
-  return <div className="article-body">{headings.length > 1 && <nav className="article-toc"><p>CONTENTS</p>{headings.map((heading, index) => <a href={`#section-${index}`} key={heading}>{heading}</a>)}</nav>}{blocks.map((block, index) => {
+  return <div className="article-body">{headings.length > 1 && <nav className="article-toc"><p>CONTENTS</p>{headings.map((heading, index) => <a href={`#section-${index}`} onClick={(event) => scrollToSection(event, `section-${index}`)} key={heading}>{heading}</a>)}</nav>}{blocks.map((block, index) => {
     if (/^##\s+/.test(block)) return <h2 key={index} id={`section-${headings.indexOf(block.replace(/^##\s+/, ''))}`}>{block.replace(/^##\s+/, '')}</h2>
-    if (/^>\s?/.test(block)) return <blockquote key={index}>{block.replace(/^>\s?/gm, '')}</blockquote>
+    if (/^>\s?/.test(block)) return <blockquote key={index}><Inline text={block.replace(/^>\s?/gm, '')} /></blockquote>
     if (/^```/.test(block)) return <pre key={index}><code>{block.replace(/^```\w*\n?|```$/g, '')}</code></pre>
-    if (/^[-*]\s+/.test(block)) return <ul key={index}>{block.split('\n').map((line) => <li key={line}>{line.replace(/^[-*]\s+/, '')}</li>)}</ul>
+    if (/^[-*]\s+/.test(block)) return <ul key={index}>{block.split('\n').map((line) => <li key={line}><Inline text={line.replace(/^[-*]\s+/, '')} /></li>)}</ul>
     if (/^---$/.test(block)) return <hr key={index} />
+    if (/^\|.*\|\s*\n\|?\s*:?-{3,}/.test(block)) return <Table key={index} block={block} />
     const image = block.match(/^!\[(.*?)\]\((.*?)\)$/)
     if (image) return <figure key={index} className="article-image"><img src={image[2]} alt={image[1]} loading="lazy" /><figcaption>{image[1]}</figcaption></figure>
-    return <p key={index}>{block}</p>
+    return <p key={index}><Inline text={block} /></p>
   })}</div>
 }
 
