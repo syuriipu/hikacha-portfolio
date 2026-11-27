@@ -7,6 +7,7 @@ updatedAt:
 category: 制作日記
 tags: [タグ]
 cover:
+coverColor:
 featured: false
 draft: true
 relatedWorks: []

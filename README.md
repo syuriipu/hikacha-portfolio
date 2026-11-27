@@ -52,7 +52,7 @@ npm run lint
 
 1. `content/journal/article-template.md` を複製します。
 2. `slug`、`title`、`description`、`category`、`tags` を編集します。
-3. 画像は `public/media/journal/` に置き、`cover: media/journal/ファイル名.jpg` のように書きます。
+3. 画像は `public/media/journal/` に置き、`cover: media/journal/ファイル名.jpg` のように書きます。`cover` を空にすると、マスコットのイラスト＋自動で選ばれる色の背景が自動でサムネになります（色は `coverColor: '#dce7eb'` で変更可）。
 4. 下書き中は `draft: true` のままにします。`npm run dev` でだけ確認できます。
 5. 公開する時は、確認済みの `date` を入力して `draft: false` にします。
 

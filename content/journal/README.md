@@ -23,4 +23,6 @@ relatedProjects: [colony-of-hearts]
 本文
 ```
 
+`cover` を空にすると、マスコットのイラスト（`public/media/journal/mascot-laptop.webp`）と記事ごとに自動で選ばれる背景色で自動的にサムネが作られます。背景色を変えたいときは `coverColor: '#dce7eb'` のように指定します。
+
 本文はMarkdownとして安全に表示されます。HTMLやスクリプトは実行されません。
