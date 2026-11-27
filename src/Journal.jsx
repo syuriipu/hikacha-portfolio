@@ -61,6 +61,11 @@ function Blocks({ body }) {
   const blocks = body.split('\n\n').filter(Boolean)
   const headings = blocks.filter((block) => /^##\s+/.test(block)).map((block) => block.replace(/^##\s+/, ''))
   return <div className="article-body">{headings.length > 1 && <nav className="article-toc"><p>CONTENTS</p>{headings.map((heading, index) => <a href={`#section-${index}`} onClick={(event) => scrollToSection(event, `section-${index}`)} key={heading}>{heading}</a>)}</nav>}{blocks.map((block, index) => {
+    if (/^####\s+/.test(block)) return <h4 key={index}><Inline text={block.replace(/^####\s+/, '')} /></h4>
+    if (/^###\s+/.test(block)) return <h3 key={index}><Inline text={block.replace(/^###\s+/, '')} /></h3>
+    if (/^#\s+/.test(block)) return <h2 key={index} className="article-part"><span>PART</span>{block.replace(/^#\s+/, '')}</h2>
+    if (block.split('\n').every((line) => !line.trim() || /^( {4}|\t)/.test(line))) return <pre key={index} className="article-diagram">{block.split('\n').map((line) => line.replace(/^( {4}|\t)/, '')).join('\n').replace(/\n+$/, '')}</pre>
+    if (block.split('\n').filter((line) => line.trim()).every((line) => /^\d+\.\s+/.test(line))) return <ol key={index}>{block.split('\n').filter((line) => line.trim()).map((line) => <li key={line}><Inline text={line.replace(/^\d+\.\s+/, '')} /></li>)}</ol>
     if (/^##\s+/.test(block)) return <h2 key={index} id={`section-${headings.indexOf(block.replace(/^##\s+/, ''))}`}>{block.replace(/^##\s+/, '')}</h2>
     if (/^>\s?/.test(block)) return <blockquote key={index}><Inline text={block.replace(/^>\s?/gm, '')} /></blockquote>
     if (/^```/.test(block)) return <pre key={index}><code>{block.replace(/^```\w*\n?|```$/g, '')}</code></pre>
