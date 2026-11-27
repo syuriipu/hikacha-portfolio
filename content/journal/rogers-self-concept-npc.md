@@ -5,7 +5,7 @@ description: 臨床心理学概論で学んだロジャーズの自己理論か�
 date: 2026-11-27
 category: 技術・学び
 tags: [心理学, ゲーム開発, AI, NPC, 人格形成, インスピレーション]
-cover: media/coh-forest.webp
+cover:
 featured: false
 draft: false
 relatedWorks: []

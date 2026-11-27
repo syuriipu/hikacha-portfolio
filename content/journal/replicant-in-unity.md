@@ -5,7 +5,7 @@ description: 哲学概論の「機械は心をもちうるか」の授業から�
 date: 2026-11-26
 category: 技術・学び
 tags: [大学での学び, ゲーム開発, AI, Colony of Hearts]
-cover: media/coh-talk.webp
+cover:
 featured: false
 draft: false
 relatedWorks: []
