@@ -1,5 +1,5 @@
 ---
-title: 自分自身の心を理解できない人間 ― ロジャーズのパーソナリティ理論から得たインスピレーション
+title: 心理学からインスピレーションを得た話
 slug: rogers-self-concept-npc
 description: 臨床心理学概論で学んだロジャーズの自己理論から、「自分の心すら理解できないNPC」を Colony of Hearts でどう作れるか考えた設計メモ。
 date: 2026-11-27

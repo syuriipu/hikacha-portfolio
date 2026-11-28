@@ -1,5 +1,5 @@
 ---
-title: 自分だけの制作室をつくる。
+title: ホームページつくってみた
 slug: portfolio-studio
 description: 自分だけのポートフォリオサイトを、AIと一緒に作った話。
 date: 2026-11-24

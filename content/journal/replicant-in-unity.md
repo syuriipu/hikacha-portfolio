@@ -1,5 +1,5 @@
 ---
-title: 私はUnityでレプリカントを作っているのかもしれない。
+title: 哲学からインスピレーションを得た話
 slug: replicant-in-unity
 description: 哲学概論の「機械は心をもちうるか」の授業から、Colony of Hearts の住人に本当に必要なものを考えた記録。
 date: 2026-11-26
