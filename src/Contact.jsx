@@ -4,6 +4,7 @@ import { events, seasons } from './SeasonConfig'
 import { SeasonEdition, useSeason } from './SeasonShell'
 import { APP_SUPPORT_BODY, CONTACT_EMAIL, appSupportSubject, buildGmailUrl, buildMailto, copyText, inquiries, supportedApps } from './contactConfig'
 import PhotoPlate from './PhotoPlate'
+import { StrollingBuddy } from './Buddy'
 import { photos } from './photos'
 import './Contact.css'
 
@@ -13,7 +14,7 @@ function Header() {
   return <header className="site-header contact-header"><a href="#top" className="wordmark">hikacha<span>.</span></a><p className="header-edition">THE CREATIVE ATELIER<br />CONTACT / LETTERS</p><nav aria-label="メインナビゲーション"><a href="#top">HOME</a><a href="#/works">WORKS</a><a href="#/journal">JOURNAL</a><a href="#/lab">LAB</a><a href="#/about">ABOUT</a><a className="is-current" href="#/contact" aria-current="page">CONTACT</a></nav></header>
 }
 
-function Footer() { return <footer className="site-footer"><p className="footer-logo">hikacha<span>.</span></p><p>Curiosity makes the next page.</p><div><a href="#/contact">お問い合わせ・アプリサポート</a>{contacts.map((contact) => <a href={contact.url} target="_blank" rel="noreferrer" key={contact.label}>{contact.label} ↗</a>)}</div><small>© {currentYear} hikacha. / The Creative Atelier</small></footer> }
+function Footer() { return <footer className="site-footer"><StrollingBuddy /><p className="footer-logo">hikacha<span>.</span></p><p>Curiosity makes the next page.</p><div><a href="#/contact">お問い合わせ・アプリサポート</a>{contacts.map((contact) => <a href={contact.url} target="_blank" rel="noreferrer" key={contact.label}>{contact.label} ↗</a>)}</div><small>© {currentYear} hikacha. / The Creative Atelier</small></footer> }
 
 // 封筒・便箋・切手・消印の装飾。切手の色と図柄は季節に合わせて変わります。
 function LetterIllustration() {

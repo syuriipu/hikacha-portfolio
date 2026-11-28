@@ -11,6 +11,10 @@
 .photo-portrait{transform:rotate(1.2deg)}
 @media (prefers-reduced-motion:reduce){.photo-frame img{transition:none}.photo-plate:hover .photo-frame img{transform:none}}
 
+.photo-art .photo-frame img{filter:none;mix-blend-mode:multiply}
+.photo-art:hover .photo-frame img{transform:none;filter:none}
+.photo-art{transform:rotate(1.2deg)}
+
 /* 置き場所ごとの調整 */
 .contact-photo{margin-top:clamp(36px,6vw,72px)}
 .journal-photo{margin:clamp(32px,5vw,64px) 0 clamp(8px,2vw,20px)}

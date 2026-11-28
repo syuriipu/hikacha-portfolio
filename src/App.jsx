@@ -5,6 +5,7 @@ import Journal from './Journal'
 import Lab from './Lab'
 import About from './About'
 import Contact from './Contact'
+import { StrollingBuddy } from './Buddy'
 import Secret, { SecretEaster } from './Secret'
 import { journalEntries } from './generated/journal'
 import SeasonShell, { SeasonEdition } from './SeasonShell'
@@ -105,6 +106,6 @@ export default function App() {
       <section id="about" className="content-section about-section"><RuleTitle number="04" eyebrow="ABOUT THE MAKER" title="制作室について" note="企画・開発・絵を、行ったり来たり。" /><div className="about-layout"><div className="about-copy"><p className="about-name">{profile.name}<span> / creator</span></p><p>{profile.about}</p><div className="skill-lines">{profile.skills.map((skill) => <span key={skill.label}>{skill.label}<small>{skill.note}</small></span>)}</div></div><aside className="counter" aria-label="制作アーカイブの内訳"><p>ATELIER ARCHIVE</p><strong>{archiveCount}</strong><span>pieces in the studio</span><dl><div><dt>{apps.length}</dt><dd>APPS &amp; GAMES</dd></div><div><dt>{live2d.length}</dt><dd>LIVE2D WORKS</dd></div><div><dt>{illustrations.length}</dt><dd>ILLUSTRATIONS</dd></div></dl></aside></div><div className="shelf" aria-label="アトリエの棚">{live2d.map((model) => <figure key={model.video}><video muted loop playsInline preload="metadata" poster={`${model.video}.jpg`}><source src={`${model.video}.mp4`} type="video/mp4" /></video><figcaption>{model.title}</figcaption></figure>)}</div></section>
       <aside className="home-contact" aria-label="お問い合わせのご案内"><p><span>LETTERS TO THE ATELIER</span>アプリのサポートや制作活動についてのお便りは、お問い合わせ窓口へ。</p><a href="#/contact">お問い合わせ・アプリサポート →</a></aside>
     </main>
-    <footer className="site-footer"><p className="footer-logo">hikacha<span>.</span></p><p>Curiosity makes the next page.</p><div><a href="#/contact">お問い合わせ・アプリサポート</a>{contacts.map((contact) => <a href={contact.url} target="_blank" rel="noreferrer" key={contact.label}>{contact.label} ↗</a>)}</div><small>© {currentYear} hikacha. / The Creative Atelier</small></footer>
+    <footer className="site-footer"><StrollingBuddy /><p className="footer-logo">hikacha<span>.</span></p><p>Curiosity makes the next page.</p><div><a href="#/contact">お問い合わせ・アプリサポート</a>{contacts.map((contact) => <a href={contact.url} target="_blank" rel="noreferrer" key={contact.label}>{contact.label} ↗</a>)}</div><small>© {currentYear} hikacha. / The Creative Atelier</small></footer>
   </SeasonShell>
 }
