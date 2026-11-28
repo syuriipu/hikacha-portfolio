@@ -34,7 +34,7 @@ npm run lint
 | 季節・イベントの文言や色 | `src/seasonal.js` の `seasons`、`events` |
 | JOURNAL 記事 | `content/journal/*.md` |
 | 画像・動画 | `public/media/` 以下 |
-| フリー写真（CONTACT・JOURNAL・LAB・ABOUT） | `src/photos.js` と `public/media/photos/` |
+| イラスト（CONTACT・JOURNAL・LAB・ABOUT） | `src/photos.js` と `public/media/art/` |
 | 問い合わせ先メールアドレス・件名・本文テンプレート | `src/contactConfig.js` |
 
 `public/media/example.webp` を追加した時は、データ側に `media/example.webp` と書きます。画像・動画の品質は不必要に落とさず、作品ごとに適切なファイルを使ってください。
@@ -81,15 +81,13 @@ CONTACTページ（`#/contact`）は `src/Contact.jsx`、見た目は `src/Conta
 
 フォームや外部API・バックエンドは使わず、`mailto:` リンクとクリップボードへのコピーだけで動きます。メールアプリが設定されていない環境でも、アドレスをコピーして問い合わせられます。導線はヘッダーの CONTACT、全通常ページのフッター、HOME下部、WORKSの公開済みアプリ詳細、ABOUT にあります（SECRETには置いていません）。
 
-## フリー写真を差し替える
+## イラストを差し替える
 
-CONTACT・JOURNAL・LAB・ABOUT の扉写真は [Unsplash](https://unsplash.com/license) の無料素材（Unsplash License）です。設定は `src/photos.js` にまとめています。
+CONTACT・JOURNAL・LAB・ABOUT に載せている絵は、すべて自作のイラストです（`src/photos.js` にまとめています）。歩くちびキャラは `src/Buddy.jsx`、スプライト画像は `public/media/art/buddy-sprite.webp` です。
 
-1. 新しい写真を長辺2000px前後（縦長は1100px前後）の WebP に縮小して `public/media/photos/` に置きます。元の大きなJPGはサイトのフォルダに入れないでください（そのまま公開ファイルに含まれ、表示が重くなります）。
-2. `src/photos.js` の `src`・`width`・`height`・`alt`（画像の説明）・`caption`・`credit`（撮影者名）・`url`（Unsplashの写真ページ）を書き換えます。
-3. Unsplash+ の写真はこのライセンスでは使えません。人物が写った写真や、ロゴ・商標が目立つ写真も避けてください。
-
-写真は `src/PhotoPlate.jsx` で表示し、色味は `src/PhotoPlate.css` のフィルターでサイトに合わせています。
+1. 絵を長辺1000〜1400px前後の WebP に縮小して `public/media/art/` に置きます。元の大きな画像やPSDはサイトのフォルダに入れないでください。
+2. `src/photos.js` の `src`・`width`・`height`・`alt`（絵の説明）・`caption`・`bg`（絵のまわりの余白の色）を書き換えます。
+3. 版権キャラクターのファンアートを載せる場合は、その作品のファン活動ガイドラインを確認してください。
 
 ## 表紙・季節・イベントを編集する
 

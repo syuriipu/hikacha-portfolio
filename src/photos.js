@@ -1,29 +1,28 @@
-// サイトで使っている写真（Unsplash License・無料素材）と自作イラスト。差し替えるときは public/media/photos/ に画像を置き、ここを書き換えます。
-// 元データは大きいので、長辺2000px前後のWebPに縮小してから置いてください。
+// サイトに載せている自作イラスト。差し替えるときは public/media/art/ に画像（長辺1000〜1400px前後のWebP）を置き、ここを書き換えます。
+// bg は絵のまわりの余白の色（上→下のグラデーション）。余白には絵をぼかしたものも重なります（背景が単色の絵は blur: false で単色だけに）。
 export const photos = {
   contact: {
-    src: 'media/photos/contact-stationery.webp', width: 2000, height: 833,
-    alt: 'セージグリーンの机に、白い便箋と黄色い封筒、シダの葉と小花が並んでいる',
-    caption: 'WRITING DESK — 便箋を一枚、選ぶところから。',
-    credit: 'micheile henderson', url: 'https://unsplash.com/photos/a-group-of-objects-on-a-surface-8DkO_U8iB2o',
+    src: 'media/art/angel-pink.webp', width: 900, height: 1200,
+    alt: '花びらが舞う中、ピンクのドレスで振り返る天使の女の子',
+    caption: 'ILLUSTRATION',
+    credit: 'hikacha', bg: ['#fff8f8', '#efc0d5'],
   },
   journal: {
-    src: 'media/photos/journal-letters.webp', width: 2000, height: 833,
-    alt: '古い本の上に、切手とリボンで束ねた手紙、花びらとユーカリの葉が置かれている',
-    caption: 'LETTERS & RECORDS — 記録は、未来の自分への手紙。',
-    credit: 'Olga Shashkina', url: 'https://unsplash.com/photos/a-close-up-of-an-envelope-with-flowers-on-it-jjwL6YjIo94',
+    src: 'media/art/angel-apples.webp', width: 1400, height: 979,
+    alt: 'リンゴを手に持ち、リンゴのかごを抱えた、輪と羽のある天使',
+    caption: 'ILLUSTRATION',
+    credit: 'hikacha', bg: ['#e5dce7', '#cbc0db'],
   },
   lab: {
-    src: 'media/photos/lab-blank-notebook.webp', width: 2000, height: 833,
-    alt: '木のテーブルに置かれた白紙のスケッチブックとペン',
-    caption: 'A BLANK PAGE — 白紙のページに、最初の種をまく。',
-    credit: 'Kelly Sikkema', url: 'https://unsplash.com/photos/a-notepad-pen-and-cup-of-coffee-on-a-wooden-table-Lo6OIm82gTs',
+    src: 'media/art/sketch-elle-maid.webp', width: 979, height: 1100,
+    alt: '角のあるメイド姿のエルが、大きな鎌を振りかぶるらくがき',
+    caption: 'SKETCH — エル',
+    credit: 'hikacha', bg: ['#e9fff7', '#e9fff7'], blur: false,
   },
-  // ここから下は自分で描いたイラスト（url を空にすると「Illustration: 〜」と表示されます）
   standing: {
     src: 'media/art/standing.webp', width: 688, height: 1500,
     alt: '袴姿で刀を背負い、棒付きキャンディを持って笑うキャラクターの立ち絵',
     caption: 'ORIGINAL CHARACTER',
-    credit: 'hikacha', url: '',
+    credit: 'hikacha',
   },
 }

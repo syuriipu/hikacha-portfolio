@@ -112,6 +112,11 @@
 .mail-link .mail-fallback-actions button:hover{background:var(--pale)}
 .mail-fallback-status{min-height:1.2em;color:var(--sage);font:500 11px var(--sans)}
 
+/* 宛名カードで手招きする落書き */
+.address-cat{position:absolute;right:clamp(64px,8vw,120px);bottom:0;width:auto;height:min(280px,92%);mix-blend-mode:multiply;pointer-events:none;transform-origin:bottom center}
+@media(min-width:801px){.address-body{padding-right:clamp(220px,24vw,330px)}}
+@media(max-width:800px){.address-cat{position:static;display:block;height:190px;margin:-6px 18px 0 auto}}
+
 @media(max-width:800px){
   .contact-hero{grid-template-columns:1fr}
   .letter-illustration{justify-self:center;max-width:260px}
