@@ -21,8 +21,8 @@ export const photos = {
   },
   standing: {
     src: 'media/art/standing.webp', width: 688, height: 1500,
-    alt: '袴姿で刀を背負い、棒付きキャンディを持って笑う葛城くんの立ち絵',
-    caption: '葛城くん',
+    alt: '袴姿で刀を背負い、棒付きキャンディを持って笑う葛城の立ち絵',
+    caption: '葛城',
     credit: 'hikacha',
   },
 }

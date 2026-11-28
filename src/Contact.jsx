@@ -135,7 +135,7 @@ export default function Contact() {
         </div>
         <p className="address-fallback">メールアプリが開かない場合は、アドレスをコピーして、お使いのメールサービスから送ってください。</p>
       </div>
-      <img className="address-cat" src="media/art/doodle-cat.webp" alt="猫耳の葛城くんが、猫の手で手招きしている落書き" width="699" height="1060" loading="lazy" />
+      <img className="address-cat" src="media/art/doodle-cat.webp" alt="猫耳の葛城が、猫の手で手招きしている落書き" width="699" height="1060" loading="lazy" />
       <SmallStamp label="✉" />
     </section>
 
