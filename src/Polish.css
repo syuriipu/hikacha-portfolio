@@ -46,3 +46,7 @@
   .profile-mark{min-height:330px;place-items:end center;padding-bottom:30px}
   .profile-mark .profile-avatar{width:min(58%,220px)}
 }
+
+/* フッターの一言を1行で */
+.site-footer>p:not(.footer-logo){max-width:none;white-space:nowrap}
+@media(max-width:480px){.site-footer>p:not(.footer-logo){white-space:normal}}

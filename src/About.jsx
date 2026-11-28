@@ -21,7 +21,7 @@ function Door({ open, onClose }) {
 
 function Journey() { return <section className="journey"><header className="about-section-head"><p className="eyebrow">CREATIVE JOURNEY.</p><h2>制作活動の年表</h2><p>作品といっしょに、少しずつ増えてきた制作の記録。</p></header><ol>{aboutData.journey.map((entry) => <li key={`${entry.era}-${entry.title}`}><p>{entry.era}</p><span className="journey-line" aria-hidden="true" /><div className="journey-card">{entry.image && <img src={entry.image} alt="" loading="lazy" />}{entry.href ? <a href={entry.href}><h3>{entry.title}</h3><span>{entry.note} ↗</span></a> : <div><h3>{entry.title}</h3><span>{entry.note}</span></div>}</div></li>)}</ol></section> }
 
-function Footer() { return <footer className="site-footer"><StrollingBuddy /><p className="footer-logo">hikacha<span>.</span></p><p>Curiosity makes the next page.</p><div><a href="#/contact">お問い合わせ・アプリサポート</a>{contacts.map((contact) => <a href={contact.url} target="_blank" rel="noreferrer" key={contact.label}>{contact.label} ↗</a>)}</div><small>© {currentYear} hikacha. / The Creative Atelier</small></footer> }
+function Footer() { return <footer className="site-footer"><StrollingBuddy /><p className="footer-logo">hikacha<span>.</span></p><p>ここが最新のようです(´ω`)</p><div><a href="#/contact">お問い合わせ・アプリサポート</a>{contacts.map((contact) => <a href={contact.url} target="_blank" rel="noreferrer" key={contact.label}>{contact.label} ↗</a>)}</div><small>© {currentYear} hikacha. / The Creative Atelier</small></footer> }
 
 function AboutContent() {
   const [taps, setTaps] = useState(0)
