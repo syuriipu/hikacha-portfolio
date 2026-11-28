@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useSeason } from './SeasonShell'
 import './Buddy.css'
 
-// ひかちゃのちびキャラ（没ゲームの歩きアニメを流用）。スプライトは 8コマ×2段：
+// 葛城くんのちびキャラ（没ゲームの歩きアニメを流用）。スプライトは 8コマ×2段：
 // 1段目＝左向き、2段目＝右向き / 0〜5コマ目＝歩き、6＝立ち、7＝まばたき
 const SHEET = 'media/art/buddy-sprite.webp'
 const RATIO = 165 / 260
@@ -28,7 +28,7 @@ export function StandingBuddy({ height = 150, facing = 'left' }) {
     loop()
     return () => window.clearTimeout(timer)
   }, [paused])
-  return <Sprite height={height} col={blink ? BLINK : STAND} row={facing === 'left' ? 0 : 1} className="buddy-standing" role="img" aria-label="ひかちゃのちびキャラ" />
+  return <Sprite height={height} col={blink ? BLINK : STAND} row={facing === 'left' ? 0 : 1} className="buddy-standing" role="img" aria-label="葛城くんのちびキャラ" />
 }
 
 // フッターの上のふちを歩き回る。たまに立ち止まってまばたき。クリックすると少し立ち止まる。
@@ -80,7 +80,7 @@ export function StrollingBuddy() {
   const rest = () => { const s = state.current; const now = performance.now(); s.restUntil = now + 2600; s.nextBlink = now + 80 }
 
   return <div className="buddy-track" ref={track} style={{ height }}>
-    <button type="button" className="buddy-walker" onClick={rest} aria-label="歩いているちびキャラ（押すと立ち止まります）" style={{ transform: `translateX(${Math.round(view.x)}px)` }}>
+    <button type="button" className="buddy-walker" onClick={rest} aria-label="歩いている葛城くん（押すと立ち止まります）" style={{ transform: `translateX(${Math.round(view.x)}px)` }}>
       <Sprite height={height} col={paused || prefersReducedMotion() ? STAND : view.col} row={view.row} />
     </button>
   </div>
