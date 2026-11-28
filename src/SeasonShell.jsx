@@ -40,7 +40,7 @@ export function SeasonEdition({ compact = false, className = '' }) {
   const { season, event } = useSeason()
   const info = event ? events[event] : season ? seasons[season] : null
   if (!info) return null
-  return <p className={`season-edition ${compact ? 'is-compact' : ''} ${className}`}><span>{info.motif}</span><b>{info.label}</b>{!compact && <em>{info.message}</em>}</p>
+  return <p className={`season-edition ${compact ? 'is-compact' : ''} ${className}`}><span>{info.motif}</span><b>{info.label}</b>{!compact && info.message && <em>{info.message}</em>}</p>
 }
 
 export default function SeasonShell({ children }) {

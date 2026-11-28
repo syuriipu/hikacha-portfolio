@@ -110,7 +110,7 @@ export const contacts = [
 export const aboutData = {
   profile: {
     name: 'ひかちゃ',
-    intro: '大学生。アプリ開発、ゲーム制作、イラスト、Live2Dなど、興味の赴くままにいろいろなものを作っています。AIや新しい技術を活用しながら、自分のアイデアを形にすることを楽しんでいます。',
+    intro: '大学生。アプリ開発、ゲーム制作、イラスト、Live2Dなど、興味の赴くままにいろいろなものを作っています。AIと格闘したり自制心を育てながら楽しんで作ってます。',
     editorialNote: 'なお、作りたいものが多すぎて時間が足りない模様。',
   },
   journey: [
@@ -179,7 +179,7 @@ export const projects = [
     title: '休日予定アプリ（仮）',
     stage: 'SPROUT',
     visibility: 'public',
-    description: '休日を、待ち遠しい日に。',
+    description: '休日の過ごし方を提案してくれるアプリ',
     concept: 'ユーザーの趣味や好みに合わせて休日の過ごし方やお出かけ先を提案し、平日のうちから休日を楽しみにできるようにするアプリ。',
     latestActivity: 'アンケート・インタビュー、コンセプトの整理。',
     nextStep: 'MVPの検討。',
@@ -230,7 +230,7 @@ export const projects = [
     stage: 'SEED',
     visibility: 'public',
     description: '好きな料理や食材の傾向から、自分に合いそうな献立を提案するアプリのアイデア。',
-    concept: '好みから、今日の献立との出会いをつくるためのアイデア。',
+    concept: '好みから献立を考えてくれるアプリのアイデア',
     technologies: [],
     images: [],
     milestones: [],
@@ -248,7 +248,7 @@ export const projects = [
     category: 'アプリ',
     status: '公開終了',
     description: 'ChatGPTのAPIとLive2Dを使用し、キャラクターとの会話を楽しめる、以前App Storeで公開していたアプリ。',
-    concept: '過去の創作活動を大切に保存する、標本室の最初の記録。',
+    concept: '公開は終わったけど、思い出として置いてる',
     technologies: ['ChatGPT API', 'Live2D'],
     images: [
       { src: 'media/elle-and-you-icon.png', alt: 'エルといっしょのアプリアイコン', group: 'app' },

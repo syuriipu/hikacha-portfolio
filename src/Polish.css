@@ -50,3 +50,9 @@
 /* フッターの一言を1行で */
 .site-footer>p:not(.footer-logo){max-width:none;white-space:nowrap}
 @media(max-width:480px){.site-footer>p:not(.footer-logo){white-space:normal}}
+
+/* ABOUT：大きすぎた文字を控えめに */
+.philosophy blockquote{font-size:clamp(1.45rem,2.8vw,2.4rem);line-height:1.35;letter-spacing:-.02em}
+.about-future h2{margin:14px 0 30px;font-size:clamp(1.45rem,2.6vw,2.3rem);line-height:1.35;letter-spacing:-.02em}
+.profile-copy aside b{font-size:1.05rem}
+.secret-door h2{font-size:1.55rem}

@@ -1,15 +1,15 @@
 export const seasons = {
-  spring: { label: 'SPRING EDITION', ja: '春の特別号', message: '新しい季節、新しいひらめき。', accent: '#d89aaa', soft: '#f4e2e6', motif: '✿' },
-  summer: { label: 'SUMMER EDITION', ja: '夏の特別号', message: '好奇心が、ぐんぐん育つ季節。', accent: '#679f9d', soft: '#dceced', motif: '❋' },
-  autumn: { label: 'AUTUMN EDITION', ja: '秋の特別号', message: '実りの季節、小さなアイデアを集めて。', accent: '#b27a3f', soft: '#f1e4cf', motif: '❦' },
-  winter: { label: 'WINTER EDITION', ja: '冬の特別号', message: '静かな季節に、次の作品を育てる。', accent: '#7696ad', soft: '#e2ebf0', motif: '❄' },
+  spring: { label: 'SPRING EDITION', ja: '春の特別号', message: '', accent: '#d89aaa', soft: '#f4e2e6', motif: '✿' },
+  summer: { label: 'SUMMER EDITION', ja: '夏の特別号', message: '', accent: '#679f9d', soft: '#dceced', motif: '❋' },
+  autumn: { label: 'AUTUMN EDITION', ja: '秋の特別号', message: '', accent: '#b27a3f', soft: '#f1e4cf', motif: '❦' },
+  winter: { label: 'WINTER EDITION', ja: '冬の特別号', message: '', accent: '#7696ad', soft: '#e2ebf0', motif: '❄' },
 }
 
 export const events = {
   newyear: { label: 'NEW YEAR', message: 'あけましておめでとうございます。今年もたくさん作るぞ〜！', motif: '❀' },
   aprilfools: { label: 'EDITORIAL NOTICE', message: '本日の編集部は、少々様子がおかしいようです。', motif: '!' },
-  halloween: { label: 'HALLOWEEN NOTE', message: '小さな夜の来客が、制作室をのぞいています。', motif: '♧' },
-  christmas: { label: 'WINTER LETTER', message: '小さな星とリボンを、制作室から。', motif: '✦' },
+  halloween: { label: 'HALLOWEEN NOTE', message: '', motif: '♧' },
+  christmas: { label: 'WINTER LETTER', message: '', motif: '✦' },
 }
 
 const eventSeasons = { newyear: 'winter', aprilfools: 'spring', halloween: 'autumn', christmas: 'winter' }

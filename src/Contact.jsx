@@ -11,7 +11,7 @@ import './Contact.css'
 const currentYear = new Date().getFullYear()
 
 function Header() {
-  return <header className="site-header contact-header"><a href="#top" className="wordmark">hikacha<span>.</span></a><p className="header-edition">THE CREATIVE ATELIER<br />CONTACT / LETTERS</p><nav aria-label="メインナビゲーション"><a href="#top">HOME</a><a href="#/works">WORKS</a><a href="#/journal">JOURNAL</a><a href="#/lab">LAB</a><a href="#/about">ABOUT</a><a className="is-current" href="#/contact" aria-current="page">CONTACT</a></nav></header>
+  return <header className="site-header contact-header"><a href="#top" className="wordmark">hikacha<span>.</span></a><p className="header-edition">THE CREATIVE ATELIER<br />CONTACT</p><nav aria-label="メインナビゲーション"><a href="#top">HOME</a><a href="#/works">WORKS</a><a href="#/journal">JOURNAL</a><a href="#/lab">LAB</a><a href="#/about">ABOUT</a><a className="is-current" href="#/contact" aria-current="page">CONTACT</a></nav></header>
 }
 
 function Footer() { return <footer className="site-footer"><StrollingBuddy /><p className="footer-logo">hikacha<span>.</span></p><p>ここが最新のようです(´ω`)</p><div><a href="#/contact">お問い合わせ・アプリサポート</a>{contacts.map((contact) => <a href={contact.url} target="_blank" rel="noreferrer" key={contact.label}>{contact.label} ↗</a>)}</div><small>© {currentYear} hikacha. / The Creative Atelier</small></footer> }
@@ -112,10 +112,9 @@ export default function Contact() {
   return <><a className="skip-link" href="#contact-main">本文へ移動</a><Header /><main id="contact-main" className="contact-page">
     <section className="contact-hero" aria-labelledby="contact-title">
       <div className="contact-hero-copy">
-        <p className="eyebrow">THE CREATIVE ATELIER / LETTERS</p>
         <h1 id="contact-title">Contact<span>.</span></h1>
         <p className="contact-jp">制作室へのお手紙。</p>
-        <p>アプリのこと、作品のこと、ちょっとした感想まで。便箋に書くような気持ちで、気軽にお便りください。</p>
+        <p>アプリのこと、作品のこと、ただの感想でも。気軽にどうぞ！</p>
         <SeasonEdition compact />
       </div>
       <LetterIllustration />
@@ -165,7 +164,7 @@ export default function Contact() {
         <p className="letter-number">No. 03</p>
         <p className="eyebrow">Other Messages.</p>
         <h2>その他</h2>
-        <p>その他のご質問・ご感想など。短いひとことでも、うれしく読ませていただきます。</p>
+        <p>その他のご質問・ご感想など。ひとことでも嬉しいです！</p>
         <MailLink className="letter-button" wrapperClassName="is-card-action" subject={inquiries.other.subject}><span aria-hidden="true">✉</span>その他のお便りを送る</MailLink>
       </article>
     </section>
@@ -176,7 +175,7 @@ export default function Contact() {
       <p>個人で制作・運営しているため、お返事までお時間をいただく場合があります。ご了承ください。</p>
       <p>不具合についてのお問い合わせは、使用端末や発生時の状況を添えていただけると助かります。</p>
       <p className="notice-caution"><span aria-hidden="true">※</span>パスワードやアカウント情報などの機密情報は、メールに書かずにお送りください。</p>
-      <p className="notice-sign">— hikacha. 制作室</p>
+      <p className="notice-sign">— hikacha.</p>
     </aside>
   </main><Footer /></>
 }
