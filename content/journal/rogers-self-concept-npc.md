@@ -1,7 +1,7 @@
 ---
 title: 心理学からインスピレーションを得た話
 slug: rogers-self-concept-npc
-description: 臨床心理学概論で学んだロジャーズの自己理論から、「自分の心すら理解できないNPC」を Colony of Hearts でどう作れるか考えた設計メモ。
+description: 臨床心理学概論でロジャーズの理論を習って、NPCの作り方を考えた。
 date: 2026-11-27
 category: 技術・学び
 tags: [心理学, ゲーム開発, AI, NPC, 人格形成, インスピレーション]
